@@ -1,0 +1,11 @@
+{
+    "assemble": "ml64.exe /c ./main.asm /nologo /Zi /W3 /errorReport:prompt",
+    "link": "link.exe /ERRORREPORT:PROMPT /OUT:main.exe /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /SUBSYSTEM:CONSOLE /LARGEADDRESSAWARE:NO /TLBID:1 /ENTRY:main /NXCOMPAT /MACHINE:X64 main.obj",
+    "injectables":{
+        "data": "ASM_INSTRUCTION_COUNTER dq 0\nTEMP_CACHE dq 0",
+        "imports": "ReadFile proto\nWriteFile proto\nGetStdHandle proto\nHeapAlloc proto\nHeapCreate proto",
+        "input": "mov rcx,0\nmov rdx,0\nmov r8,0\ncall HeapCreate\n\nmov rcx, rax\nmov rdx, 8h\nmov r8, {{INPUT_SIZE_BYTES}}\ncall HeapAlloc\n\nmov arrayPtr,rax\n\n\nmov rcx, -10\ncall GetStdHandle\nmov rcx,rax\nmov rdx, [arrayPtr]\nmov r8, {{INPUT_SIZE_BYTES}}\nmov r9,0\ncall ReadFile\n",
+        "output": "mov TEMP_CACHE, rcx\nmov rcx, -11\ncall GetStdHandle\nmov rcx, rax\nlea rdx, ASM_INSTRUCTION_COUNTER\nmov r8, 8\nmov r9, 0\ncall WriteFile\nmov rcx, TEMP_CACHE",
+        "logger": "mov TEMP_CACHE, rax\nmov rax, ASM_INSTRUCTION_COUNTER\nadd rax, 1\nmov ASM_INSTRUCTION_COUNTER, rax\nmov rax, TEMP_CACHE"
+    }
+}
