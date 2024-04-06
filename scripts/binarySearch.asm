@@ -1,24 +1,24 @@
-WriteFile proto
 ExitProcess proto
+
 .data
-array db 0,1,2,3,4,5,6,7,8,9,-1
-
-
+arrayPtr dq ?
 
 .code
 main proc
 	mov rax, -1
-	lea rbx, array
+	mov rbx, [arrayPtr]
 	mov rdx, 0
 	;Find the size of the array
 	findSizeLoop:
 		inc rax
-		mov dh, [rbx+rax+1]
-		cmp dh, -1
+		mov rdx, [rbx+rax*8]
+		cmp rdx, -1
 	loopne findSizeLoop
 
+dec rax
+
 ;SEARCH FOR
-mov r8, 3
+mov r8, 7
 
 
 ;INIT
@@ -37,9 +37,11 @@ jg noResult
 	mov rcx, 2
 	div rcx
 	
-	mov r9b, [rbx+rax]
-	cmp r8b,r9b
+	mov r9, [rbx+rax*8]
+	
 	;COMPARE
+	cmp r8,r9
+
 	je found
 	jl lessThan
 	jg greaterThan

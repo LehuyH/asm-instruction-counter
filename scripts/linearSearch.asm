@@ -1,20 +1,14 @@
-WriteFile proto
 ExitProcess proto
+
 .data
-array db 234,20,6,73,15,6,73,3,6,100,6,3,43,-1
-
-
-
-
-
+arrayPtr dq ?
 .code
 main proc
-
 ;SEARCH FOR
 mov bh, 44
 
 mov rax,-1
-lea rcx, array
+mov rcx, [arrayPtr]
 
 linearSearch:
 inc rax

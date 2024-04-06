@@ -1,11 +1,11 @@
-WriteFile proto
 ExitProcess proto
+
 .data
-array db 5,13,12,7,14,10,9,15,8,3,4,6,11,2,16,1,-1
+arrayPtr dq ?
 .code
 main proc
 	mov rax, -1
-	lea rbx, array
+	mov rbx, [arrayPtr]
 	mov rdx, 0
 	;Find the size of the array
 	findSizeLoop:
