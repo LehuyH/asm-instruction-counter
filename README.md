@@ -1,8 +1,8 @@
 # ASM Instruction Counter 📈 
 
-A platform agnostic tool to count the number of instructions ran by an assembly program.
+A platform-agnostic tool to count the number of instructions run by an assembly program.
 
-## Why Use GoatUI?
+## Why Use asm-instruction-counter?
 
  
 -  **Plug and Play**: asm-instruction-counter is a platform agnostic tool that can be used with any assembly program and build pipeline.
@@ -11,7 +11,7 @@ A platform agnostic tool to count the number of instructions ran by an assembly 
 
 - **Common Datasets**: asm-instruction-counter provides a utility to generate common datasets for testing and benchmarking such as `random`, `needleInHaystack`, and `ordered`.
 
-- **100% Configurable**: Create custom build pipelines and configurations to suit your needs.
+- **100% Configurable**: Create custom-build pipelines and configurations to suit your needs.
   
 
 ## 🛠️ Installation
